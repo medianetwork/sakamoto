@@ -30,7 +30,7 @@ try
 {
 
 
-$staff_code = $_GET['staffcode'];
+$pro_code = $_GET['procode'];
 
 $dsn = 'mysql:dbname=shop;host=localhost;charset=utf8';
 $user = 'root';
@@ -38,13 +38,13 @@ $password = '';
 $dbh = new PDO($dsn, $user, $password);
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$sql = 'SELECT name FROM mst_staff WHERE code=?';
+$sql = 'SELECT name FROM mst_product WHERE code=?';
 $stmt = $dbh->prepare($sql);
-$data[]  = $staff_code;
+$data[]  = $pro_code;
 $stmt->execute($data);
 
 $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-$staff_name=$rec['name'];
+$pro_name=$rec['name'];
 
 $dbh = null;
 
@@ -57,17 +57,21 @@ exit();
 }
 ?>
 
-スタッフ情報参照<br />
+商品削除<br />
 <br />
-スタッフコード<br />
-<?php print $staff_code;?>
+商品コード<br />
+<?php print $pro_code;?>
 <br />
-スタッフ名<br />
-<?php print $staff_name; ?>
+商品名<br />
+<?php print $pro_name;?>
 <br />
+この商品を削除してもよろしいですか？<br />
 <br />
-<form>
+<form method="post" action="pro_delete_done.php">
+<input type="hidden" name="code" value="<?php print $pro_code;?>">
+
 <input type="button"onclick="history.back()"value="戻る">
+<input type="submit" value="OK">
 </form>
 
 </body>

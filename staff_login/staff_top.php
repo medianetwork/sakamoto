@@ -15,7 +15,6 @@ print'<br />';
 }
 ?>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,9 +22,13 @@ print'<br />';
 <title>ろくまる農園</title>
 </head>
 <body>
-
-商品が選択されていません。<br />
-<a href="pro_list.php">戻る</a>
+ショップ管理トップメニュー<br />
+<br />
+<a href="../staff/staff_list.php">スタッフ管理</a>
+<br />
+<a href="../product/pro_list.php">商品管理</a><br />
+<br />
+<a href="staff_logout.php">ログアウト</a><br />
 
 </body>
 </html>
