@@ -32,15 +32,21 @@ try
 {
 $pro_code=$_GET['procode'];
 
-$cart[]=$pro_code;
-$_SESSION['cart'] = $cart;
-
-foreach($cart as $key => $val)
+if(isset($_SESSION['cart']) == true)
 {
-print$val;
-print'<br />'
+    $cart = $_SESSION['cart'];
+    $kazu = $_SESSION['kazu'];
+    if(in_array($pro_code, $cart) == true)
+    {
+        print 'その商品はすでにカートに入っています。<br />';
+        print '<a href = "shop_list.php"> 商品一覧に戻る</a>';
+        exit();
+    }
 }
-
+$cart[] = $pro_code;
+$kazu[] = 1;
+$_SESSION['cart'] = $cart;
+$_SESSION['kazu'] = $kazu;
 }
 
 catch(Exception $e)

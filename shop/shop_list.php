@@ -6,7 +6,6 @@ if(isset($_SESSION['member_login']) == false)
 print'ようこそゲスト様';
 print'<a href="member_login.html">会員ログイン</a><br />';
 print'<br />';
-exit();
 }
 else
 {
@@ -44,7 +43,7 @@ $stmt->execute();
 
 $dbh = null;
 
-print '商品一覧<br /><br />';
+print "商品一覧<br /><br />";
 
 while(true)
 {
@@ -58,13 +57,14 @@ break;
 
 print'<a href="shop_product.php?procode='.$rec['code'].'">';
 
-print $rec['name'].'   ';
+print $rec['name'].'';
 print $rec['price'].'円';
 print '</a>';
 print'<br />';
 
 }
-
+print '<br />';
+print '<a href="shop_cartlook.php">カートを見る</a><br />';
 
 }
 
