@@ -115,7 +115,6 @@ exit();
 <td> <?php print $pro_name[$i];?> </td>
 <td> <?php print $pro_gazou[$i];?> </td>
 <td> <?php print $pro_price[$i].'円';?> </td>
-<td> <?php print $kazu[$i];?> </td>
 
 <td> <input type="text" name="kazu<?php print $i;?>" value = "<?php print $kazu[$i];?>"> </td>
 <td> <?php print $pro_price[$i] * (int)$kazu[$i];?>円 </td>
