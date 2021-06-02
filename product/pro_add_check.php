@@ -28,8 +28,11 @@ print'<br />';
 
 <?php
 
-$pro_name = $_POST['name'];
-$pro_price = $_POST['price'];
+require_once('../common/common.php');
+
+$post = sanitize($_POST);
+$pro_name = $post['name'];
+$pro_price = $post['price'];
 $pro_gazou = $_FILES['gazou'];
 
 $pro_name = htmlspecialchars($pro_name, ENT_QUOTES, 'UTF-8');
@@ -68,7 +71,7 @@ print'画像が大きすぎます';
 else
 {
 move_uploaded_file($pro_gazou['tmp_name'],'./gazou/'.$pro_gazou['name']);
-print'<img src="./gazou/" " '.$pro_gazou['name'].'">';
+print'<img src="./gazou/'.$pro_gazou['name'].'">';
 print'<br />';
 }
 
@@ -88,7 +91,7 @@ print'上記の商品を追加します。<br />';
 print'<form method="post" action="pro_add_done.php">';
 print'<input type="hidden" name="name" value="'.$pro_name.'">';
 print'<input type="hidden" name="price" value="'.$pro_price.'">';
-print'<input type="hidden" name="gazou" value="'.$pro_gazou['name'].'">';
+print'<input type="hidden" name="gazou_name" value="'.$pro_gazou['name'].'">';
 print'<br />';
 print'<input type="button" onclick="history.back()" value="戻る">';
 print'<input type="submit" value="OK">';

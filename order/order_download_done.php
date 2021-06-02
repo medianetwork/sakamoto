@@ -42,31 +42,29 @@ try
 
     $sql = '
     SELECT
-        dat_sales.code,
-        dat_sales.date,
-        dat_sales.code_member,
-        dat_sales.name AS dat_sales_name,
-        dat_sales.email,
-        dat_sales.postal1,
-        dat_sales.postal2,
-        dat_sales.address,
-        dat_sales.tel,
-        dat_sales_product.code_product,
-        mst_product.name AS mst_product_name,
-        dat_sales_product.price,
-        dat_sales_product.quantity
+    dat_sales.code,
+    dat_sales.date,
+    dat_sales.code_member,
+    dat_sales.name AS dat_sales_name,
+    dat_sales.email,
+    dat_sales.postal1,
+    dat_sales.postal2,
+    dat_sales.address,
+    dat_sales.tel,
+    dat_sales_product.code_product,
+    mst_product.name AS mst_product_name,
+    dat_sales_product.price,
+    dat_sales_product.quantity
     FROM
-        dat_sales,dat_sales_product,mst_product
+    dat_sales,dat_sales_product,mst_product
     WHERE
-        dat_sales.code=dat_sales_product.code_sales
-        AND dat_sales_product.code_product=mst_product.code
-        AND submit(dat_sales.date,1,4)=?
-        AND submit(dat_sales.date,6,2)=?
-        AND submit(dat_sales.date,9,2)=?
+    dat_sales.code=dat_sales_product.code_sales
+    AND dat_sales_product.code_product=mst_product.code
+    AND substr(dat_sales.date,1,4)=?
+    AND substr(dat_sales.date,6,2)=?
+    AND substr(dat_sales.date,9,2)=?
     ';
 
-
-    $sql = 'SELECT code,name FROM mst_staff WHERE 1';
     $stmt = $dbh->prepare($sql);
     $data[] = $year;
     $data[] = $month;
@@ -111,7 +109,13 @@ try
         $csv .= "\n";
     }
 
-    print nl2br($csv);
+    //print nl2br($csv);
+
+    $file=fopen('./chumon.csv','w');
+    $csv = mb_convert_encoding($csv, 'SJIS', 'UTF-8');
+    fputs($file, $csv);
+    fclose($file);
+
 }
 catch(Exception $e)
 {
@@ -121,6 +125,9 @@ catch(Exception $e)
 
 ?>
 
+<a href="chumon.csv">注文データのダウンロード</a><br />
+<br />
+<a href="order_download.php">日付選択へ</a><br />
 <br />
 <a href="../staff_login/staff_top.php">トップメニュー</a><br />
 

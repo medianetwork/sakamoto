@@ -17,9 +17,15 @@ $postal1 = $post['postal1'];
 $postal2 = $post['postal2'];
 $address = $post['address'];
 $tel = $post['tel'];
+$chumon = $post['chumon'];
+$pass = $post['pass'];
+$pass2 = $post['pass2'];
+$danjo = $post['danjo'];
+$birth = $post['birth'];
 
 $okflg = true;
 
+// 名前が入力されていないとき
 if($onamae == '')
 {
     print 'お名前が入力されていません。　<br /><br />';
@@ -32,6 +38,7 @@ else
     print '<br /><br />';
 }
 
+// メールアドレスが正しく入力されていないとき
 if(preg_match('/\A[\w\-\.]+\@[\w\-\.]+\.([a-z]+)\z/',$email) == 0)
 {
     print 'メールアドレスを正確に入力してください。<br /><br />';
@@ -44,6 +51,7 @@ else
     print '<br /><br />';
 }
 
+// 郵便番号が正しく入力されてないとき
 if(preg_match('/\A[\w\-\.]+\z/', $postal1) == 0)
 {
     print '郵便番号は半角数字で入力してください。<br /><br />';
@@ -55,6 +63,8 @@ else
     print $postal1.'-'.$postal2;
     print '<br /><br />';
 }
+
+// 住所が入力されていないとき
 if($address == '')
 {
 print '住所が入力されていません。<br /><br />';
@@ -68,6 +78,7 @@ else
 
 }
 
+// 電話番号が正しく入力されてないとき
 if(preg_match('/\A\d{2,5}-?\d{2,5}-?\d{4,5}\z/', $tel) == 0)
 {
     print '電話番号が入力されていません。<br /><br />';
@@ -80,6 +91,42 @@ else
     print '<br /><br />';
 }
 
+// shop_form.htmlで「chumon」が「chumontouroku」にチェックされたとき
+if($chumon == 'chumontouroku')
+{
+
+    if($pass == '') // パスワードが未入力の時
+    {
+        print 'パスワードが入力されていません。<br /><br />';
+        $okflg = false;
+    }
+
+    if($pass != $pass2) // パスワードと再入力したパスワードが一致しないとき
+    {
+        print 'パスワードが一致しません。<br /><br />';
+        $okflg = false;
+    }
+
+    print '性別<br />';
+
+    
+    if($danjo == 'dan') // 性別が男性を選択したとき
+    {
+        print '男性';
+    }
+    else    // 性別が女性を選択したとき
+    {
+        print  '女性';
+    }
+    print '<br /><br />';
+
+    print '生まれた年<br />';
+    print $birth;
+    print '年代';
+    print '<br /><br />';
+
+}
+
 if($okflg == true)
 {
     print '<form method = "post" action = "shop_form_done.php">';
@@ -89,6 +136,11 @@ if($okflg == true)
     print '<input type = "hidden" name = "postal2" value = "'.$postal2.'">';
     print '<input type = "hidden" name = "address" value = "'.$address.'">';
     print '<input type = "hidden" name = "tel" value = "'.$tel.'">';
+    print '<input type = "hidden" name = "chumon" value = "'.$chumon.'">';
+    print '<input type = "hidden" name = "pass" value = "'.$pass.'">';
+    print '<input type = "hidden" name = "danjo" value = "'.$danjo.'">';
+    print '<input type = "hidden" name = "birth" value = "'.$birth.'">';
+    
     print '<input type = "button" onclick = "history.back()" value = "戻る">';
     print '<input type = "submit"  value = "OK"><br />';
     print '</form>';

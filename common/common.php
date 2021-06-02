@@ -33,4 +33,39 @@ function sanitize($before)
     }
     return $after;
 }
+
+
+
+function pulldown_year()
+{
+    print '<select name = "year">';
+        print '<option value = "2017">2017</option>';
+        print '<option value = "2018">2018</option>';
+        print '<option value = "2019">2019</option>';
+        print '<option value = "2020">2020</option>';
+        print '<option value = "2021">2021</option>';
+    print '</select>';
+}
+
+function pulldown_month()
+{
+    print '<select name ="month">';
+    
+        for($i = 1; $i <= 12; $i++): 
+    
+            print '<option value = "'.$i.'">'.$i.'</option>';
+
+        endfor;
+    print '</select>';
+}
+
+function pulldown_day()
+{
+    print '<select name = "day">';
+    
+        for($i = 1; $i <= 31; $i++): 
+            print '<option value= "'.$i.'"> '.$i.'</option>';
+        endfor;
+    print '</select>';
+}
 ?>
