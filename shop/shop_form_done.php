@@ -12,8 +12,8 @@ session_regenerate_id(true);
 <body>
 <?php
 
-// try
-// {
+try
+{
     require_once('../common/common.php');
 
     $post = sanitize($_POST);
@@ -152,7 +152,7 @@ session_regenerate_id(true);
     {
         print '会員登録が完了致しました。<br />';
         print '次回からメールアドレスとパスワードでログインしてください。<br />';
-        print 'ご注文が簡単にできるようになります。,br />';
+        print 'ご注文が簡単にできるようになります。<br />';
         print '<br />';
     }
 
@@ -202,12 +202,12 @@ session_regenerate_id(true);
     // メール送信の命令
     // mb_send_mail('info@rokumarunouen.co.jp', $title, $honbun, $header);
 
-// }
-// catch(Exception $e)
-// {
-//     print 'ただいま障害発生により大変ご迷惑お掛けしております。';
-//     exit();
-// }
+}
+catch(Exception $e)
+{
+    print 'ただいま障害発生により大変ご迷惑お掛けしております。';
+    exit();
+}
 ?>
 
 <br />

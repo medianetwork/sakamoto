@@ -1,0 +1,81 @@
+  
+  /* =Elements style
+  ---------------------- */
+  .spinner {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    margin: 0 auto;
+  }
+  
+  .bubble-1,
+  .bubble-2,
+  .bubble-3,
+  .bubble-4,
+  .bubble-5 {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 50%;
+    border-radius: 100%;
+    background-color: #4b9cdb;
+  }
+  
+  .bubble-2 {
+    top: auto;
+    bottom: 0;
+  }
+  
+  /* =Animate the stuff
+  ------------------------ */
+  
+  .load-9 .spinner {
+    animation: loadingI 4s linear infinite;
+  }
+  .load-9 .bubble-1,
+  .load-9 .bubble-2,
+  .load-9 .bubble-3,
+  .load-9 .bubble-4,
+  .load-9 .bubble-5 {
+    animation: bounce 2s ease-in-out infinite;
+  }
+  .load-9 .bubble-2 {
+    animation-delay: -1s;
+  }
+
+  .load-9 .bubble-3 {
+    animation-delay: -0.5s;
+  }
+
+  .load-9 .bubble-4 {
+    animation-delay: -3s;
+  }
+
+  .load-9 .bubble-5 {
+    animation-delay: -4s;
+  }
+
+  @keyframes loadingF {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes loadingI {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1);
+    }
+  }

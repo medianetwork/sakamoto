@@ -52,7 +52,7 @@ else
 }
 
 // 郵便番号が正しく入力されてないとき
-if(preg_match('/\A[\w\-\.]+\z/', $postal1) == 0)
+if(preg_match('/\A[\d\-\.]+\z/', $postal1) == 0)
 {
     print '郵便番号は半角数字で入力してください。<br /><br />';
     $okflg = false;
@@ -141,8 +141,8 @@ if($okflg == true)
     print '<input type = "hidden" name = "danjo" value = "'.$danjo.'">';
     print '<input type = "hidden" name = "birth" value = "'.$birth.'">';
     
-    print '<input type = "button" onclick = "history.back()" value = "戻る">';
-    print '<input type = "submit"  value = "OK"><br />';
+    print '<input type = "button" style="width: 50px; padding: 2.5px;" onclick = "history.back()" value = "戻る">';
+    print '<input type = "submit" style="width: 50px; padding: 4px;" value = "OK"><br />';
     print '</form>';
 }
 else
@@ -153,6 +153,5 @@ else
 }
 
 ?>
-
 </body>
 </html>
