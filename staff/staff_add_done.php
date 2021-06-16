@@ -27,9 +27,7 @@ print'<br />';
 
 <?php
 
-try
-{
-
+try{
 require_once('../common/common.php');
 
 $post = sanitize($_POST);
@@ -59,12 +57,9 @@ catch (Exception $e)
 print'ただいま障害により大変ご迷惑お掛けしております。';
 exit();
 }
-
-
 ?>
 
 <a href="staff_list.php">戻る</a>
 
 </body>
-
 </html>

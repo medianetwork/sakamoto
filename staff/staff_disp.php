@@ -1,17 +1,15 @@
 <?php
 session_start();
 session_regenerate_id(true);
-if(isset($_SESSION['login']) == false)
-{
-print'ログインされていません。<br />';
-print'<a href="../staff_login/staff_login.html">ログイン画面へ</a>';
-exit();
-}
-else
-{
-print $_SESSION['staff_name'];
-print 'さんログイン中<br />';
-print'<br />';
+
+if(isset($_SESSION['login']) == false) {
+    print'ログインされていません。<br />';
+    print'<a href="../staff_login/staff_login.html">ログイン画面へ</a>';
+    exit();
+} else {
+    print $_SESSION['staff_name'];
+    print 'さんログイン中<br />';
+    print'<br />';
 }
 ?>
 
@@ -26,34 +24,29 @@ print'<br />';
 <body>
 <?php
 
-try
-{
+try {
+    $staff_code = $_GET['staffcode'];
 
+    $dsn = 'mysql:dbname=shop;host=localhost;charset=utf8';
+    $user = 'root';
+    $password = '';
+    $dbh = new PDO($dsn, $user, $password);
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$staff_code = $_GET['staffcode'];
+    $sql = 'SELECT name FROM mst_staff WHERE code=?';
+    $stmt = $dbh->prepare($sql);
+    $data[]  = $staff_code;
+    $stmt->execute($data);
 
-$dsn = 'mysql:dbname=shop;host=localhost;charset=utf8';
-$user = 'root';
-$password = '';
-$dbh = new PDO($dsn, $user, $password);
-$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+    $staff_name=$rec['name'];
 
-$sql = 'SELECT name FROM mst_staff WHERE code=?';
-$stmt = $dbh->prepare($sql);
-$data[]  = $staff_code;
-$stmt->execute($data);
-
-$rec = $stmt->fetch(PDO::FETCH_ASSOC);
-$staff_name=$rec['name'];
-
-$dbh = null;
+    $dbh = null;
 
 }
-
-catch(Exception $e)
-{
-print'ただいま障害により大変ご迷惑お掛けしております';
-exit();
+catch(Exception $e) {
+    print'ただいま障害により大変ご迷惑お掛けしております';
+    exit();
 }
 ?>
 

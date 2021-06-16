@@ -100,6 +100,7 @@ exit();
 
 カートの中身<br />
 <br />
+<?php $AddKazu = 0?>
 <form method = "post" action = "kazu_change.php">
 <table border = "1">
 <tr>
@@ -111,14 +112,22 @@ exit();
 <td>削除</td>
 </tr>
 <?php for($i=0;$i<$max;$i++):?>
-<tr>
-<td> <?php print $pro_name[$i];?> </td>
-<td> <?php print $pro_gazou[$i];?> </td>
-<td> <?php print $pro_price[$i].'円';?> </td>
+    <?php for($i2=0;$i2<$max;$i2++):?>
+       <?php if($pro_name[$i2] != $pro_name[$i] &&
+                $pro_gazou[$i2] != $pro_gazou[$i] &&
+                $pro_price[$i2] != $pro_price[$i]): ?>
+            <tr>
+            <td> <?php print $pro_name[$i];?> </td>
+            <td> <?php print $pro_gazou[$i];?> </td>
+            <td> <?php print $pro_price[$i].'円';?> </td>
 
-<td> <input type="text" name="kazu<?php print $i;?>" value = "<?php print $kazu[$i];?>"> </td>
-<td> <?php print $pro_price[$i] * (int)$kazu[$i];?>円 </td>
-<td> <input type="checkbox" name = "sakujo<?php print $i;?>"> </td>
+            <td> <input type="text" name="kazu<?php print $AddKazu;?>" value = "<?php print $kazu[$i];?>"> </td>
+            <td> <?php print $pro_price[$i] * (int)$kazu[$i];?>円 </td>
+            <td> <input type="checkbox" name = "sakujo<?php print $i;?>"> </td>
+            <?php else: ?>
+                <?php $AddKazu++?>
+        <?php endif ?>
+    <?php endfor ?>
 <?php endfor ?>
 
 </tr>

@@ -1,17 +1,15 @@
 <?php
 session_start();
 session_regenerate_id(true);
-if(isset($_SESSION['login']) == false)
-{
-print'ログインされていません。<br />';
-print'<a href="../staff_login/staff_login.html">ログイン画面へ</a>';
-exit();
-}
-else
-{
-print $_SESSION['staff_name'];
-print 'さんログイン中<br />';
-print'<br />';
+
+if(isset($_SESSION['login']) == false) {
+    print'ログインされていません。<br>';
+    print'<a href="../staff_login/staff_login.html">ログイン画面へ</a>';
+    exit();
+} else {
+    print $_SESSION['staff_name'];
+    print 'さんログイン中<br>';
+    print'<br>';
 }
 ?>
 
@@ -40,7 +38,7 @@ try
     $dbh = new PDO($dsn, $user, $password);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = '
+    $sql='
     SELECT
     dat_sales.code,
     dat_sales.date,
@@ -62,13 +60,12 @@ try
     AND dat_sales_product.code_product=mst_product.code
     AND substr(dat_sales.date,1,4)=?
     AND substr(dat_sales.date,6,2)=?
-    AND substr(dat_sales.date,9,2)=?
-    ';
+    AND substr(dat_sales.date,9,2)=?';
 
     $stmt = $dbh->prepare($sql);
     $data[] = $year;
-    $data[] = $month;
-    $data[] = $day;
+    $data[] = str_pad($month, 2, 0, STR_PAD_LEFT);
+    $data[] = str_pad($day, 2, 0, STR_PAD_LEFT);
     $stmt->execute($data);
 
     $dbh = null;
@@ -76,13 +73,15 @@ try
     $csv='注文コード,注文日時,会員番号,お名前,メール,郵便番号,住所,TEL,商品コード,商品名,価格,数量';
     $csv .= "\n";
 
-    while(true)
-    {
+    while(true) { 
+
         $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-        if($rec == false)
+        
+        if($rec==false)
         {
             break;
         }
+
         $csv .= $rec['code'];
         $csv .= ',';
         $csv .= $rec['date'];
@@ -107,9 +106,13 @@ try
         $csv .= ',';
         $csv .= $rec['quantity'];
         $csv .= "\n";
+    
     }
 
-    //print nl2br($csv);
+    print nl2br($csv);
+
+    // 
+     
 
     $file=fopen('./chumon.csv','w');
     $csv = mb_convert_encoding($csv, 'SJIS', 'UTF-8');

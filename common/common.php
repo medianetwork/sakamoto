@@ -25,6 +25,7 @@ function gengo($seireki)
     return($gengo);
 }
 
+// 無毒化　
 function sanitize($before)
 {
     foreach($before as $key => $value)
@@ -51,11 +52,11 @@ function pulldown_month()
 {
     print '<select name ="month">';
     
-        for($i = 1; $i <= 12; $i++): 
+        for($i = 1; $i <= 12; $i++){ 
     
             print '<option value = "'.$i.'">'.$i.'</option>';
 
-        endfor;
+        }
     print '</select>';
 }
 
@@ -63,9 +64,11 @@ function pulldown_day()
 {
     print '<select name = "day">';
     
-        for($i = 1; $i <= 31; $i++): 
+        for($i = 1; $i <= 31; $i++){
             print '<option value= "'.$i.'"> '.$i.'</option>';
-        endfor;
+        }
+
     print '</select>';
 }
-?>
+
+// PHPしか書いてないときは閉じタグはいらない

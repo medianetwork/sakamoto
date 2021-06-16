@@ -128,6 +128,7 @@ try
     $stmt = $dbh->prepare($sql);
     $stmt->execute();
     $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+    
     $lastcode = $rec['LAST_INSERT_ID()'];
 
     for($i = 0; $i < $max; $i++)
